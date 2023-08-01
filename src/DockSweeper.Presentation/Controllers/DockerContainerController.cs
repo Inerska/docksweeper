@@ -34,7 +34,8 @@ public class DockerContainerController
         {
             var dockerClient = _dockerClientFactory.GetDockerClient();
 
-            _logger.LogInformation("Client connected with configuration : {@configuration}",
+            _logger.LogInformation(
+                "Client connected with configuration : {@configuration}",
                 dockerClient.Configuration.EndpointBaseUri);
 
             var containers = await dockerClient.Containers.ListContainersAsync(

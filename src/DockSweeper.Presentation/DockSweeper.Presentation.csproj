@@ -32,10 +32,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="webclient\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\DockSweeper.Application\DockSweeper.Application.csproj" />
       <ProjectReference Include="..\DockSweeper.Infrastructure\DockSweeper.Infrastructure.csproj" />
     </ItemGroup>
