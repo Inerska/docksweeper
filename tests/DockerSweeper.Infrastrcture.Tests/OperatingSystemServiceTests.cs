@@ -46,4 +46,18 @@ public class OperatingSystemServiceTests
         // Assert
         Assert.True(result);
     }
+    
+    [Fact]
+    public void IsWsl_ReturnsTrue_WhenRunningOnWsl()
+    {
+        // Arrange
+        var mockOperatingSystemService = new Mock<IOperatingSystemService>();
+        mockOperatingSystemService.Setup(o => o.IsWsl).Returns(true);
+
+        // Act
+        var result = mockOperatingSystemService.Object.IsWsl;
+
+        // Assert
+        Assert.True(result);
+    }
 }

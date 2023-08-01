@@ -65,4 +65,19 @@ public class DockerClientFactoryTests
         // Act & Assert
         Assert.Throws<UnsupportedOperatingSystemException>(() => factory.GetDockerClient());
     }
+    
+    [Fact]
+    public void GetDockerClient_WhenWsl_ReturnsWslClient()
+    {
+        // Arrange
+        var mockOsService = new Mock<IOperatingSystemService>();
+        mockOsService.Setup(x => x.IsWsl).Returns(true);
+        var factory = new DockerClientFactory(mockOsService.Object);
+
+        // Act
+        var client = factory.GetDockerClient();
+
+        // Assert
+        Assert.Equal("npipe://./pipe/docker_engine", client.Configuration.EndpointBaseUri.AbsoluteUri);
+    }
 }
