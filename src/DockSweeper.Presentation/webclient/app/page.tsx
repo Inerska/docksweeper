@@ -1,15 +1,13 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+"use client";
+
+import {Inter} from 'next/font/google'
 import DockerContainers from "@/components/DockerContainersComponent";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({subsets: ['latin']});
 
 export default function Home() {
-  return (
-      <main>
+    return <main>
         <h1 className="text-red-500">DockSweeper</h1>
-          <DockerContainers />
-      </main>
-  )
+        <DockerContainers/>
+    </main>
 }

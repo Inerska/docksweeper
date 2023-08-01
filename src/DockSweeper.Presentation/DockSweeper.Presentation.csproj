@@ -36,4 +36,9 @@
       <ProjectReference Include="..\DockSweeper.Infrastructure\DockSweeper.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="webclient\components\ui\" />
+      <Folder Include="webclient\public\" />
+    </ItemGroup>
+
 </Project>
