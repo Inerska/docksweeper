@@ -1,4 +1,8 @@
-﻿using DockSweeper.Application.Abstractions;
+﻿// // Copyright (c) Alexis Chân Gridel. All Rights Reserved.
+// // Licensed under the GNU General Public License v3.0.
+// // See the LICENSE file in the project root for more information.
+
+using DockSweeper.Application.Abstractions;
 using DockSweeper.Infrastructure.Exceptions;
 using DockSweeper.Infrastructure.Services.Docker;
 using Moq;
@@ -65,7 +69,7 @@ public class DockerClientFactoryTests
         // Act & Assert
         Assert.Throws<UnsupportedOperatingSystemException>(() => factory.GetDockerClient());
     }
-    
+
     [Fact]
     public void GetDockerClient_WhenWsl_ReturnsWslClient()
     {
