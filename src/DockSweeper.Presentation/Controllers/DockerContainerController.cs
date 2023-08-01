@@ -23,7 +23,8 @@ public class DockerContainerController
     }
 
     [HttpGet(Name = "GetDockerContainers")]
-    public async Task<ActionResult<IEnumerable<ContainerListResponse>>> Get([FromQuery] int limit = 10)
+    public async Task<ActionResult<IEnumerable<ContainerListResponse>>> Get([FromQuery] int limit = 10,
+        [FromQuery] bool all = true)
     {
         try
         {
@@ -35,7 +36,8 @@ public class DockerContainerController
             var containers = await dockerClient.Containers.ListContainersAsync(
                 new ContainersListParameters
                 {
-                    Limit = limit
+                    Limit = limit,
+                    All = all
                 });
 
             return Ok(containers);
