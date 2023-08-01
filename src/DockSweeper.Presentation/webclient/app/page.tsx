@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
       <main>
-        <h1 className={styles.title}>DockSweeper</h1>
+        <h1 className="text-red-500">DockSweeper</h1>
           <DockerContainers />
       </main>
   )
