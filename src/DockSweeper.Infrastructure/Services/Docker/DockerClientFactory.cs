@@ -19,6 +19,8 @@ public class DockerClientFactory
     {
         return _operatingSystemService switch
         {
+            { IsWsl: true } => new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine"))
+                .CreateClient(),
             { IsWindows: true } => new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine"))
                 .CreateClient(),
             { IsLinux: true } => new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock"))

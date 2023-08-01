@@ -16,4 +16,9 @@ public interface IOperatingSystemService
     ///     Returns true if the operating system is macOS.
     /// </summary>
     bool IsMacOs { get; }
+    
+    /// <summary>
+    ///   Returns true if the operating system is Windows Subsystem for Linux.
+    /// </summary>
+    bool IsWsl { get; }
 }

@@ -14,4 +14,16 @@ public class OperatingSystemService
 
     /// <inheritdoc />
     public bool IsMacOs => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+
+    /// <inheritdoc />
+    public bool IsWsl
+    {
+        get
+        {
+            if (!IsLinux || !File.Exists("/proc/version")) return false;
+            
+            var version = File.ReadAllText("/proc/version");
+            return version.Contains("Microsoft") || version.Contains("WSL");
+        }
+    }
 }
