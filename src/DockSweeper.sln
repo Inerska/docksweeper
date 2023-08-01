@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockSweeper.Infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockSweeper.Presentation", "DockSweeper.Presentation\DockSweeper.Presentation.csproj", "{6EF0E576-9EBB-4284-B38D-5EAA0B63EF1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerSweeper.Infrastrcture.Tests", "..\tests\DockerSweeper.Infrastrcture.Tests\DockerSweeper.Infrastrcture.Tests.csproj", "{DEE53B6D-033E-4AAC-B557-98F34D681204}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{6EF0E576-9EBB-4284-B38D-5EAA0B63EF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF0E576-9EBB-4284-B38D-5EAA0B63EF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF0E576-9EBB-4284-B38D-5EAA0B63EF1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEE53B6D-033E-4AAC-B557-98F34D681204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE53B6D-033E-4AAC-B557-98F34D681204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE53B6D-033E-4AAC-B557-98F34D681204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE53B6D-033E-4AAC-B557-98F34D681204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
