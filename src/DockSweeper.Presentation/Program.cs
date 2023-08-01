@@ -1,5 +1,7 @@
 using DockSweeper.Application.Abstractions;
+using DockSweeper.Application.Abstractions.Docker;
 using DockSweeper.Infrastructure.Services;
+using DockSweeper.Infrastructure.Services.Docker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddSingleton<IOperatingSystemService, OperatingSystemService>()
+    .AddSingleton<IDockerClientFactory, DockerClientFactory>();
     ;
 
 var app = builder.Build();
