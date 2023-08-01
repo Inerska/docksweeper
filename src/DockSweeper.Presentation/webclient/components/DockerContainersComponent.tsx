@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useState } from 'react';
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 
 export default function DockerContainers() {
     const [containers, setContainers] = useState([]);
@@ -12,12 +13,20 @@ export default function DockerContainers() {
     }, []);
 
     return (
-        <section>
+        <section className="flex">
             {containers.map((container, index) => (
-                <article key={index}>
-                    <h1>{container.name}</h1>
-                    <p>{container.status}</p>
-                </article>
+                <Card className="">
+                    <CardHeader>
+                        <CardTitle>{container.names}</CardTitle>
+                        <CardDescription>{container.id}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <p>Card Content</p>
+                    </CardContent>
+                    <CardFooter>
+                        <p>Card Footer</p>
+                    </CardFooter>
+                </Card>
             ))}
         </section>
     );
