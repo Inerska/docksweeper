@@ -21,4 +21,9 @@
       </PackageReference>
     </ItemGroup>
 
+
+    <ItemGroup>
+      <ProjectReference Include="..\DockSweeper.Application\DockSweeper.Application.csproj" />
+    </ItemGroup>
+
 </Project>
