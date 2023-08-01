@@ -1,4 +1,4 @@
-using DockSweeper.Application.Interfaces;
+using DockSweeper.Application.Abstractions;
 using Moq;
 
 namespace DockerSweeper.Infrastrcture.Tests;

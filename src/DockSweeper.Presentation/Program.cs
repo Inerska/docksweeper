@@ -1,4 +1,4 @@
-using DockSweeper.Application.Interfaces;
+using DockSweeper.Application.Abstractions;
 using DockSweeper.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,4 @@
-﻿namespace DockSweeper.Application.Interfaces;
+﻿namespace DockSweeper.Application.Abstractions;
 
 public interface IOperatingSystemService
 {
