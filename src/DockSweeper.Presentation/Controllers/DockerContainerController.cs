@@ -28,7 +28,7 @@ public class DockerContainerController
 
     [HttpGet(Name = "GetDockerContainers")]
     public async Task<ActionResult<IEnumerable<ContainerListResponse>>> Get([FromQuery] int limit = 10,
-        [FromQuery] bool all = true)
+        [FromQuery] bool all = false)
     {
         try
         {
@@ -42,7 +42,17 @@ public class DockerContainerController
                 new ContainersListParameters
                 {
                     Limit = limit,
-                    All = all
+                    
+                    // Filters, because the "all" container list parameter is not working
+                    Filters = new Dictionary<string, IDictionary<string, bool>>
+                    {
+                        {
+                            "status", new Dictionary<string, bool>
+                            {
+                                {"running", all}
+                            }
+                        }
+                    }
                 });
 
             return Ok(containers);
