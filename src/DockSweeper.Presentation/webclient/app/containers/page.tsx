@@ -6,7 +6,7 @@ async function getData(): Promise<Container[]> {
     return await response.json();
 }
 
-export default async function DemoPage() {
+export default async function ContainerDataTableComponent() {
     const data = await getData();
     
     return <div> 
