@@ -2,7 +2,7 @@
 import {DataTable} from "./data-table"
 
 async function getData(): Promise<Container[]> {
-    const response = await fetch("http://localhost:5236/api/v1/DockerContainer?all=false");
+    const response = await fetch("http://localhost:5236/api/v1/DockerContainer?all=true");
     return await response.json();
 }
 
