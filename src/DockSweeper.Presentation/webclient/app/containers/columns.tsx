@@ -3,6 +3,7 @@ import React from "react";
 import {Button} from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import {match} from "ts-pattern";
+import Link from "next/link";
 
 export interface Container {
     id: string;
@@ -41,7 +42,17 @@ export const columns: ColumnDef<Container>[] = [
             )
         },
         accessorKey: "names",
-        cell: ({ row }) => row.original.names.map(name => name.substring(1)).join(", "),
+        cell: ({ row }) => (
+            <div>
+                {row.original.names.map((name, index) => (
+                    <div key={name}>
+                        <Link href={`/docker/containers/${row.original.id}`} className="underline">
+                            {name.substring(1)}
+                        </Link>
+                    </div>
+                ))}
+            </div>
+        ),
         filterFn: (row, id, filterValue) => {
             return row.original.names.some(name => name.includes(filterValue))
         }
