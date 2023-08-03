@@ -41,6 +41,7 @@ export const columns: ColumnDef<Container>[] = [
             )
         },
         accessorKey: "names",
+        cell: ({ row }) => row.original.names.map(name => name.substring(1)).join(", "),
         filterFn: (row, id, filterValue) => {
             return row.original.names.some(name => name.includes(filterValue))
         }
