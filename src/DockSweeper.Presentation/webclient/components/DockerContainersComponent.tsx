@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import Image from "next/image";
 
 export default function DockerContainers() {
     const [containers, setContainers] = useState([]);
@@ -16,10 +17,11 @@ export default function DockerContainers() {
         <section className="flex flex-col gap-10">
             <h1 className="text-3xl font-semibold">Your containers</h1>
             {containers.map((container, index) => (
-                <Card className="" key={container.id}>
+                <Card className="w-[300px]" key={container.id}>
                     <CardHeader>
+                        <Image src="/images/moby-logo.png" alt="Docker" width="50" height="50" />
                         <CardTitle>{container.names}</CardTitle>
-                        <CardDescription>{container.id}</CardDescription>
+                        <CardDescription className="truncate">{container.id}</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <p>Card Content</p>

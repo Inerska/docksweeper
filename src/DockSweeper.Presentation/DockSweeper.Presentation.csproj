@@ -38,7 +38,6 @@
 
     <ItemGroup>
       <Folder Include="webclient\components\ui\" />
-      <Folder Include="webclient\public\" />
     </ItemGroup>
 
 </Project>
