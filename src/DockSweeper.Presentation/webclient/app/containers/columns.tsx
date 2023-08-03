@@ -40,6 +40,9 @@ export const columns: ColumnDef<Container>[] = [
             )
         },
         accessorKey: "names",
+        filterFn: (row, id, filterValue) => {
+            return row.original.names.some(name => name.includes(filterValue))
+        }
     },
     {
         header: ({ column }) => {
