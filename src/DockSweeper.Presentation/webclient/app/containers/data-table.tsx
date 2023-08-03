@@ -11,8 +11,11 @@ import {
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
 import { Button } from "@/components/ui/button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Input} from "@/components/ui/input";
+import {Switch} from "@/components/ui/switch";
+import {Label} from "@/components/ui/label";
+import {match} from "ts-pattern";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -28,6 +31,21 @@ export function DataTable<TData, TValue>({
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
         []
     )
+    const [showActive, setShowActive] = useState(false);
+    useEffect(() => {
+        const filter = match(showActive)
+            .with(true, () => [])
+            .with(false, () => [
+                {
+                    id: "state",
+                    value: "running",
+                },
+            ])
+            .exhaustive();
+
+        setColumnFilters(filter);
+    }, [showActive]);
+
 
     const table = useReactTable({
         data,
@@ -45,13 +63,20 @@ export function DataTable<TData, TValue>({
     });
 
     return <div>
-        <div className="flex items-center py-4">
-            <Input
-                placeholder="Filter by name..."
-                value={(table.getColumn("names")?.getFilterValue() as string) || ""}
-                onChange={(event) => table.getColumn("names")?.setFilterValue(event.target.value)}
-                className="max-w-sm"
-            />
+        <div className="flex w-full justify-between">
+            <div className="flex items-center py-4">
+                <Input
+                    placeholder="Filter by name..."
+                    value={(table.getColumn("names")?.getFilterValue() as string) || ""}
+                    onChange={(event) => table.getColumn("names")?.setFilterValue(event.target.value)}
+                    className="max-w-sm"
+                />
+            </div>
+
+            <div className="flex items-center space-x-2">
+                <Switch id="showActive" onCheckedChange={setShowActive} checked={showActive}/>
+                <Label htmlFor="showActive-mode">Show non-active containers</Label>
+            </div>
         </div>
         <div className="rounded-md border">
             <Table>

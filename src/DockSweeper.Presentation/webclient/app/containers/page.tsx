@@ -2,14 +2,14 @@
 import {DataTable} from "./data-table"
 
 async function getData(): Promise<Container[]> {
-    const response = await fetch("http://localhost:5236/api/v1/DockerContainer?all=true");
+    const response = await fetch(`http://localhost:5236/api/v1/DockerContainer?all=true`);
     return await response.json();
 }
 
 export default async function ContainerDataTableComponent() {
     const data = await getData();
-    
-    return <div> 
+
+    return <div>
         <DataTable columns={columns} data={data}/>
     </div>
 }
