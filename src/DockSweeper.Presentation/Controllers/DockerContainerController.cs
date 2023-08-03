@@ -27,7 +27,8 @@ public class DockerContainerController
     }
 
     [HttpGet(Name = "GetDockerContainers")]
-    public async Task<ActionResult<IEnumerable<ContainerListResponse>>> Get([FromQuery] int limit = 10,
+    public async Task<ActionResult<IEnumerable<ContainerListResponse>>> Get(
+        [FromQuery] int limit = 10,
         [FromQuery] bool all = false)
     {
         try
@@ -38,21 +39,23 @@ public class DockerContainerController
                 "Client connected with configuration : {@configuration}",
                 dockerClient.Configuration.EndpointBaseUri);
 
+            var filters = all
+                ? null
+                : new Dictionary<string, IDictionary<string, bool>>
+                {
+                    {
+                        "status", new Dictionary<string, bool>
+                        {
+                            {"running", true}
+                        }
+                    }
+                };
+
             var containers = await dockerClient.Containers.ListContainersAsync(
                 new ContainersListParameters
                 {
                     Limit = limit,
-                    
-                    // Filters, because the "all" container list parameter is not working
-                    Filters = new Dictionary<string, IDictionary<string, bool>>
-                    {
-                        {
-                            "status", new Dictionary<string, bool>
-                            {
-                                {"running", all}
-                            }
-                        }
-                    }
+                    Filters = filters
                 });
 
             return Ok(containers);
