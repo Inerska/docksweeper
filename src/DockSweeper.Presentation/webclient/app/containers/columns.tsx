@@ -87,7 +87,11 @@ export const columns: ColumnDef<Container>[] = [
                 </Button>
             )
         },
-        accessorKey: "created"
+        accessorKey: "created",
+        cell: ({ row }) => {
+            const date = new Date(row.original.created);
+            return <span>{date.toLocaleDateString()} {date.toLocaleTimeString()}</span>
+        }
     },
     {
         header: ({ column }) => {
