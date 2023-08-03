@@ -2,6 +2,7 @@
 import React from "react";
 import {Button} from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
+import {match} from "ts-pattern";
 
 export interface Container {
     id: string;
@@ -88,6 +89,16 @@ export const columns: ColumnDef<Container>[] = [
                 </Button>
             )
         },
-        accessorKey: "state"
+        accessorKey: "state",
+        cell: ({ row }) => {
+            const state = row.original.state;
+            const color = match<string, string>(state)
+                .with("running", () => "bg-green-200 text-green-700")
+                .with("exited", () => "bg-red-200 text-red-700")
+                .with("created", () => "bg-yellow-200 text-yellow-700")
+                .otherwise(() => "bg-gray-200 text-gray-700");
+
+            return <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${color}`}>{state}</span>
+        }
     },
 ];
