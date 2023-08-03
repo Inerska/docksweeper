@@ -2,8 +2,9 @@
 // // Licensed under the GNU General Public License v3.0.
 // // See the LICENSE file in the project root for more information.
 
-using Docker.DotNet.Models;
-using DockSweeper.Application.Abstractions.Docker;
+using System.ComponentModel.DataAnnotations;
+using DockSweeper.Application.Containers.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DockSweeper.Presentation.Controllers;
@@ -13,52 +14,35 @@ namespace DockSweeper.Presentation.Controllers;
 public class DockerContainerController
     : ControllerBase
 {
-    private readonly IDockerClientFactory _dockerClientFactory;
     private readonly ILogger<DockerContainerController> _logger;
+    private readonly IMediator _mediator;
 
     public DockerContainerController(
         ILogger<DockerContainerController> logger,
-        IDockerClientFactory dockerClientFactory)
+        IMediator mediator)
     {
         _logger = logger
                   ?? throw new ArgumentNullException(nameof(logger));
-        _dockerClientFactory = dockerClientFactory
-                               ?? throw new ArgumentNullException(nameof(dockerClientFactory));
+        _mediator = mediator
+                    ?? throw new ArgumentNullException(nameof(mediator));
     }
 
     [HttpGet(Name = "GetDockerContainers")]
-    public async Task<ActionResult<IEnumerable<ContainerListResponse>>> Get(
-        [FromQuery] int limit = 10,
+    public async Task<IActionResult> Get(
+        [FromQuery] [Range(1, 100)] int limit = 10,
         [FromQuery] bool all = false)
     {
         try
         {
-            var dockerClient = _dockerClientFactory.GetDockerClient();
+            var containers = await _mediator.Send(
+                new GetContainersQuery(limit, all),
+                HttpContext.RequestAborted);
 
-            _logger.LogInformation(
-                "Client connected with configuration : {@configuration}",
-                dockerClient.Configuration.EndpointBaseUri);
+            _logger.LogInformation("Got {Count} docker containers", containers.Count());
 
-            var filters = all
-                ? null
-                : new Dictionary<string, IDictionary<string, bool>>
-                {
-                    {
-                        "status", new Dictionary<string, bool>
-                        {
-                            {"running", true}
-                        }
-                    }
-                };
-
-            var containers = await dockerClient.Containers.ListContainersAsync(
-                new ContainersListParameters
-                {
-                    Limit = limit,
-                    Filters = filters
-                });
-
-            return Ok(containers);
+            return containers.Match<IActionResult>(
+                Ok,
+                NotFound);
         }
         catch (Exception e)
         {
