@@ -13,9 +13,10 @@ export default function DockerContainers() {
     }, []);
 
     return (
-        <section className="flex">
+        <section className="flex flex-col gap-10">
+            <h1 className="text-3xl font-semibold">Your containers</h1>
             {containers.map((container, index) => (
-                <Card className="">
+                <Card className="" key={container.id}>
                     <CardHeader>
                         <CardTitle>{container.names}</CardTitle>
                         <CardDescription>{container.id}</CardDescription>
