@@ -5,14 +5,18 @@ import Link from "next/link";
 export default function Page({params}: { params: { id: string } }) {
     return (
         <div>
-        <header className="mb-5 flex flex-col gap-3">
-            <Link href={`/`} className="hover:-translate-x-5 transition-transform duration-200 mb-5 ease-in-out hover:text-slate-500">
-                <ArrowLeft/>
-            </Link>
-            <h1 className="font-semibold text-3xl">Container details</h1>
-            <h2 className="text-slate-500">{params.id}</h2>
-        </header>
-        <Card>
+            <header className="mb-5 flex flex-col gap-3">
+                <Link
+                    href={"/"}
+                    className="self-start hover:-translate-x-5 transition-transform duration-200 mb-5 ease-in-out hover:text-slate-500"
+                >
+                    <ArrowLeft/>
+                </Link>
+                <h1 className="font-semibold text-3xl">Container details</h1>
+                <h2 className="text-slate-500">{params.id}</h2>
+            </header>
+
+            <Card>
             <CardHeader className="flex flex-row w-full items-center gap-5">
                 <ContainerIcon/>
                 <CardTitle className="text-2xl">Container Information</CardTitle>
