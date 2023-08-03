@@ -1,4 +1,7 @@
 ﻿import {ColumnDef} from "@tanstack/react-table";
+import React from "react";
+import {Button} from "@/components/ui/button";
+import { ArrowUpDown } from "lucide-react";
 
 export interface Container {
     id: string;
@@ -11,15 +14,45 @@ export interface Container {
 
 export const columns: ColumnDef<Container>[] = [
     {
-        header: 'Id',
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Id
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         accessorKey: "id"
     },
     {
-        header: 'Names',
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Names
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         accessorKey: "names",
     },
     {
-        header: 'Image',
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Image
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         accessorKey: "image"
     },
     {
@@ -27,11 +60,31 @@ export const columns: ColumnDef<Container>[] = [
         accessorKey: "command"
     },
     {
-        header: 'Created',
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Created
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         accessorKey: "created"
     },
     {
-        header: 'State',
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    State
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         accessorKey: "state"
     },
 ];
