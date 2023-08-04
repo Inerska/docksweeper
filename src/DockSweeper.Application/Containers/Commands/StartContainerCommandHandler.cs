@@ -7,7 +7,7 @@ using DockSweeper.Application.Abstractions.Docker;
 using LanguageExt;
 using MediatR;
 
-namespace DockSweeper.Application.Commands;
+namespace DockSweeper.Application.Containers.Commands;
 
 public class StartContainerCommandHandler
     : IRequestHandler<StartContainerCommand, Option<bool>>

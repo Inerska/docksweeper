@@ -1,0 +1,32 @@
+services: 
+  api:
+    build:
+      context: DockSweeper.Presentation
+      dockerfile: Dockerfile
+    ports:
+      - "9001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+    volumes:
+      - ./DockSweeper.Presentation:/app
+      - //./pipe/docker_engine://./pipe/docker_engine
+    networks:
+      - network
+  
+  webclient:
+    build:
+      context: DockSweeper.Presentation/webclient
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./webclient:/app
+    networks:
+      - network
+    depends_on: 
+      - api
+
+networks:
+    network:
+        driver: bridge

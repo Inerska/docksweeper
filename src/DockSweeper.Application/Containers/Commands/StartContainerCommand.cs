@@ -5,7 +5,7 @@
 using LanguageExt;
 using MediatR;
 
-namespace DockSweeper.Application.Commands;
+namespace DockSweeper.Application.Containers.Commands;
 
 public record StartContainerCommand(string ContainerId)
     : IRequest, IRequest<Option<bool>>;

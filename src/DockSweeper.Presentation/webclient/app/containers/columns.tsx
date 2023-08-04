@@ -8,7 +8,7 @@ import Link from "next/link";
 export interface Container {
     id: string;
     names: string[];
-    images: string;
+    image: string;
     command: string;
     created: string;
     state: string;

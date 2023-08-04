@@ -21,8 +21,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<IO
 
 builder.Services
     .AddSingleton<IOperatingSystemService, OperatingSystemService>()
-    .AddSingleton<IDockerClientFactory, DockerClientFactory>();
-;
+    .AddSingleton<IDockerClientFactory, DockerClientFactory>()
+    ;
 
 var app = builder.Build();
 
@@ -32,8 +32,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseCors("Open");
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
