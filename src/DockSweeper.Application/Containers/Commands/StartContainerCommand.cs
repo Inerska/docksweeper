@@ -8,4 +8,4 @@ using MediatR;
 namespace DockSweeper.Application.Containers.Commands;
 
 public record StartContainerCommand(string ContainerId)
-    : IRequest, IRequest<Option<bool>>;
+    : IRequest, IRequest<bool>;

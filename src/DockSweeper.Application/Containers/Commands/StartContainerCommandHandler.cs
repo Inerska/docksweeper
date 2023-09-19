@@ -10,7 +10,7 @@ using MediatR;
 namespace DockSweeper.Application.Containers.Commands;
 
 public class StartContainerCommandHandler
-    : IRequestHandler<StartContainerCommand, Option<bool>>
+    : IRequestHandler<StartContainerCommand, bool>
 {
     private readonly IDockerClientFactory _dockerClientFactory;
 
@@ -19,19 +19,19 @@ public class StartContainerCommandHandler
         _dockerClientFactory = dockerClientFactory;
     }
 
-    public async Task<Option<bool>> Handle(StartContainerCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(StartContainerCommand request, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(request.ContainerId))
         {
-            return Option<bool>.None;
+            return false;
         }
 
         var client = _dockerClientFactory.GetDockerClient();
-        var started = await client.Containers.StartContainerAsync(request.ContainerId, new ContainerStartParameters(),
+        var started = await client.Containers.StartContainerAsync(
+            request.ContainerId,
+            new ContainerStartParameters(),
             cancellationToken);
 
-        return started
-            ? Option<bool>.Some(true)
-            : Option<bool>.None;
+        return started;
     }
 }
