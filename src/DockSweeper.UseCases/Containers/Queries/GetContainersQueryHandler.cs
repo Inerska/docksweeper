@@ -10,7 +10,7 @@ using LanguageExt;
 using MediatR;
 
 public class GetContainersQueryHandler
-    : IRequestHandler<GetContainersQuery, Option<IEnumerable<ContainerListResponse>>>
+    : IRequestHandler<GetContainersQuery, IEnumerable<ContainerListResponse>>
 {
     private readonly IDockerClientFactory _dockerClientFactory;
 
@@ -19,7 +19,7 @@ public class GetContainersQueryHandler
         _dockerClientFactory = dockerClientFactory;
     }
 
-    public async Task<Option<IEnumerable<ContainerListResponse>>> Handle(
+    public async Task<IEnumerable<ContainerListResponse>> Handle(
         GetContainersQuery request,
         CancellationToken cancellationToken)
     {
@@ -45,8 +45,6 @@ public class GetContainersQueryHandler
             },
             cancellationToken);
 
-        return containers.Any()
-            ? Option<IEnumerable<ContainerListResponse>>.Some(containers)
-            : Option<IEnumerable<ContainerListResponse>>.None;
+        return containers ?? new List<ContainerListResponse>();
     }
 }

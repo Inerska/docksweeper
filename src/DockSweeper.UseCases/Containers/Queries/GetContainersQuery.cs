@@ -9,4 +9,4 @@ using LanguageExt;
 using MediatR;
 
 public record GetContainersQuery(int Limit, bool All = false)
-    : IRequest<Option<IEnumerable<ContainerListResponse>>>;
+    : IRequest<IEnumerable<ContainerListResponse>>;

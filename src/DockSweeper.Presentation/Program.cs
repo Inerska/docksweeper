@@ -7,17 +7,17 @@ using DockSweeper.Application.Abstractions.Docker;
 using DockSweeper.Infrastructure.Services;
 using DockSweeper.Infrastructure.Services.Docker;
 using DockSweeper.UseCases.Containers.Queries;
+using FastEndpoints;
+using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options =>
+builder.Services.AddAuthorization();
+builder.Services.AddFastEndpoints();
+builder.Services.SwaggerDocument(o =>
 {
-    options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+    o.ShortSchemaNames = true;
 });
-
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetContainersQuery>());
 
 builder.Services
@@ -29,13 +29,11 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseCors("Open");
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseAuthorization();
-
-app.MapControllers();
+app.UseFastEndpoints();
+app.UseSwaggerGen();
 
 app.Run();
