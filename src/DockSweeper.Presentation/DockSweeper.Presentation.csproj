@@ -10,11 +10,11 @@
     <ItemGroup>
         <PackageReference Include="Docker.DotNet" Version="3.125.15" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9"/>
-        <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.3.0">
+        <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.5.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.6.0.74858">
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.10.0.77988">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -34,6 +34,7 @@
     <ItemGroup>
       <ProjectReference Include="..\DockSweeper.Application\DockSweeper.Application.csproj" />
       <ProjectReference Include="..\DockSweeper.Infrastructure\DockSweeper.Infrastructure.csproj" />
+      <ProjectReference Include="..\DockSweeper.UseCases\DockSweeper.UseCases.csproj" />
     </ItemGroup>
 
     <ItemGroup>
