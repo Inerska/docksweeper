@@ -11,7 +11,7 @@ async function getData(): Promise<Container[]> {
         console.error('Failed to fetch data:', err);
         return [];
     }
-    
+
     return data;
 }
 
@@ -19,6 +19,11 @@ export default async function ContainerDataTableComponent() {
     const data = await getData();
 
     return <div>
-        <DataTable columns={columns} data={data}/>
+        {
+            data && data.length > 0
+                ? <DataTable columns={columns} data={data}/>
+                : <p>No containers found</p>
+        }
+        
     </div>
 }
