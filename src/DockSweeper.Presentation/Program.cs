@@ -18,6 +18,11 @@ builder.Services.SwaggerDocument(o =>
 {
     o.ShortSchemaNames = true;
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetContainersQuery>());
 
 builder.Services
@@ -30,6 +35,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseCors("Open");
 }
 
 app.UseAuthorization();
