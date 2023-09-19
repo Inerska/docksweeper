@@ -4,7 +4,7 @@ import {columns, Container} from "./columns"
 import {DataTable} from "./data-table"
 
 async function getData(): Promise<Container[] | null> {
-    const response = await fetch(`http://localhost:5236/api/v1/DockerContainer?all=true`, {
+    const response = await fetch(`http://localhost:5236/api/containers?all=true`, {
         cache: "force-cache",
     });
 
