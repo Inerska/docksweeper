@@ -1,23 +1,27 @@
 ﻿"use client";
 
-import {columns, Container} from "./columns"
+import {columns} from "./columns"
 import {DataTable} from "./data-table"
-
-async function getData(): Promise<Container[] | null> {
-    const response = await fetch(`http://localhost:5236/api/containers?all=true`, {
-        cache: "force-cache",
-    });
-
-    if (!response.ok) {
-        throw new Error(`Request failed with status code ${response.status}`);
-    }
-
-    return response.json();
-}
+import {useEffect, useState} from "react";
 
 export default async function ContainerDataTableComponent() {
-    const data = await getData();
+    const [data, setData] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    
+    useEffect(() =>{
+        fetch(`http://localhost:5236/api/containers?all=true`, {
+            cache: "force-cache",
+        })
+            .then(response => response.json())
+            .then(data => {
+                setData(data);
+                setLoading(false);
+            })
+    }, [])
 
+    if (isLoading) return <p>Loading...</p>
+    if (!data) return <p>No profile data</p>
+    
     return <div>
         {
             data
