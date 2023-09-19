@@ -11,12 +11,12 @@ async function getData() : Promise<Container[]> {
 
 export default async function ContainerDataTableComponent() {
    
-    const data = await getData();
-    
+     const data = await getData();
+     
     return <div>
         {
-            data.length > 0
-                ? <DataTable columns={columns} data={data}/>
+            data.containers.length > 0
+                ? <DataTable columns={columns} data={data.containers}/>
                 : <div>Loading...</div>
         }
 
