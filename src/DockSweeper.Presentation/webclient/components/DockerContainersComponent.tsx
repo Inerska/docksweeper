@@ -1,6 +1,4 @@
-﻿"use client";
-
-import ContainerDataTableComponent from "@/app/containers/page";
+﻿import ContainerDataTableComponent from "@/app/containers/page";
 
 export default function DockerContainers() {
 
