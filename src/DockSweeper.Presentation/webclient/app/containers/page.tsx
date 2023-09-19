@@ -1,7 +1,7 @@
 ﻿import {columns, Container} from "./columns"
 import {DataTable} from "./data-table"
 
-async function getData(): Promise<Container[]> {
+async function getData(): Promise<Container[] | null> {
     let data = [];
 
     try {
@@ -9,7 +9,7 @@ async function getData(): Promise<Container[]> {
         data = await response.json();
     } catch (err) {
         console.error('Failed to fetch data:', err);
-        return [];
+        return null;
     }
 
     return data;
@@ -20,7 +20,7 @@ export default async function ContainerDataTableComponent() {
 
     return <div>
         {
-            data && data.length > 0
+            data
                 ? <DataTable columns={columns} data={data}/>
                 : <p>No containers found</p>
         }

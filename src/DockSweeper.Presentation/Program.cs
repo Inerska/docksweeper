@@ -6,6 +6,7 @@ using DockSweeper.Application.Abstractions;
 using DockSweeper.Application.Abstractions.Docker;
 using DockSweeper.Infrastructure.Services;
 using DockSweeper.Infrastructure.Services.Docker;
+using DockSweeper.UseCases.Containers.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<IOperatingSystemService>());
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetContainersQuery>());
 
 builder.Services
     .AddSingleton<IOperatingSystemService, OperatingSystemService>()
