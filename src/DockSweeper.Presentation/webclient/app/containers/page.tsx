@@ -1,4 +1,6 @@
-﻿import {columns, Container} from "./columns"
+﻿"use client";
+
+import {columns, Container} from "./columns"
 import {DataTable} from "./data-table"
 
 async function getData(): Promise<Container[] | null> {
