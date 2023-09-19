@@ -2,17 +2,15 @@
 import {DataTable} from "./data-table"
 
 async function getData(): Promise<Container[] | null> {
-    let data = [];
+    const response = await fetch(`http://localhost:5236/api/v1/DockerContainer?all=true`, {
+        cache: "force-cache",
+    });
 
-    try {
-        const response = await fetch(`http://localhost:5236/api/v1/DockerContainer?all=true`);
-        data = await response.json();
-    } catch (err) {
-        console.error('Failed to fetch data:', err);
-        return null;
+    if (!response.ok) {
+        throw new Error(`Request failed with status code ${response.status}`);
     }
 
-    return data;
+    return response.json();
 }
 
 export default async function ContainerDataTableComponent() {
@@ -22,8 +20,8 @@ export default async function ContainerDataTableComponent() {
         {
             data
                 ? <DataTable columns={columns} data={data}/>
-                : <p>No containers found</p>
+                : <div>Loading...</div>
         }
-        
+
     </div>
 }
