@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace DockSweeper.Presentation.Containers;
 
 public sealed class ListContainersEndpoint
-    : Endpoint<ListContainersRequest, ListContainersResponse>
+    : Endpoint<ListContainersEndpointRequest, ListContainersEndpointResponse>
 {
     private readonly ILogger<ListContainersEndpoint> _logger;
     private readonly IMediator _mediator;
@@ -32,7 +32,7 @@ public sealed class ListContainersEndpoint
     }
 
     public override async Task HandleAsync(
-        ListContainersRequest req,
+        ListContainersEndpointRequest req,
         CancellationToken ct)
     {
         var containers = await _mediator.Send(
@@ -42,7 +42,7 @@ public sealed class ListContainersEndpoint
         var containerListResponses = containers.ToList();
         _logger.LogInformation("Got {Count} docker containers", containerListResponses.Count);
 
-        Response = new ListContainersResponse
+        Response = new ListContainersEndpointResponse
         {
             Containers = containerListResponses.Select(c =>
                     new ContainerRecord(
@@ -57,14 +57,14 @@ public sealed class ListContainersEndpoint
     }
 }
 
-public sealed class ListContainersRequest
+public sealed class ListContainersEndpointRequest
 {
     [Range(1, 100)] public int Limit { get; init; } = 10;
 
     public bool All { get; init; } = false;
 }
 
-public sealed class ListContainersResponse
+public sealed class ListContainersEndpointResponse
 {
     public List<ContainerRecord> Containers { get; init; } = new();
 }
