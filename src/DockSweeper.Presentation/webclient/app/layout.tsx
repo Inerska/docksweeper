@@ -16,7 +16,7 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return <html lang="en" className={inter.className}>
-    <body className="m-10 flex">
+    <body className="m-10 flex gap-10">
     <NavbarPartial/>
     {children}
     </body>
