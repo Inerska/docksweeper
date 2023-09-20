@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using DockSweeper.UseCases.Images.Queries;
 using FastEndpoints;
 using MediatR;
 
@@ -28,8 +30,25 @@ public sealed class ListImagesEndpoint
         AllowAnonymous();
     }
 
-    public override Task HandleAsync(ListImagesEndpointRequest req, CancellationToken ct)
+    public override async Task HandleAsync(ListImagesEndpointRequest req, CancellationToken ct)
     {
+        var images = await _mediator.Send(
+            new GetImagesQuery(req.Limit, req.All),
+            ct);
+            
+        var imageListResponses = images.ToList();
+        
+        Response = new ListImagesEndpointResponse
+        {
+            Images = imageListResponses.Select(i =>
+                    new ImageRecord(
+                        i.ID,
+                        i.RepoTags,
+                        i.Created.ToString(CultureInfo.InvariantCulture),
+                        i.Size))
+                .ToList()
+        };
+        
         _logger.LogInformation("Got {Count} docker images", req.Limit);
     }
 }

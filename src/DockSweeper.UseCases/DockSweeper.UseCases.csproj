@@ -26,4 +26,8 @@
       <ProjectReference Include="..\DockSweeper.Application\DockSweeper.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Images\Commands\" />
+    </ItemGroup>
+
 </Project>

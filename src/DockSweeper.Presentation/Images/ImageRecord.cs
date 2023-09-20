@@ -4,4 +4,4 @@
 
 namespace DockSweeper.Presentation.Images;
 
-public record ImageRecord();
+public record ImageRecord(string Id, IList<string> RepoTags, string Created, long Size);
