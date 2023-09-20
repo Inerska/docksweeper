@@ -8,6 +8,7 @@ export default async function NavbarPartial() {
             <Link href="/images">Images</Link>
             <Link href="/networks">Networks</Link>
             <Link href="/volumes">Volumes</Link>
+            <Link href="/customers">Customers</Link>
             <Link href="/tickets">Tickets</Link>
         </nav>
     );
