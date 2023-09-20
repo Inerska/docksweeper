@@ -1,6 +1,7 @@
 import {Inter} from 'next/font/google'
 import './globals.css'
 import React from "react";
+import NavbarPartial from "@/components/partials/navbar.partial";
 
 export const metadata = {
     title: 'Create Next App',
@@ -15,7 +16,8 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return <html lang="en" className={inter.className}>
-    <body className="m-10">
+    <body className="m-10 flex">
+    <NavbarPartial/>
     {children}
     </body>
     </html>
