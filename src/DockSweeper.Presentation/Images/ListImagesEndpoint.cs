@@ -40,12 +40,12 @@ public sealed class ListImagesEndpoint
 
         Response = new ListImagesEndpointResponse
         {
-            Images = imageListResponses.Select(i =>
+            Images = imageListResponses.Select(image =>
                     new ImageRecord(
-                        i.ID,
-                        i.RepoTags,
-                        i.Created.ToString(CultureInfo.InvariantCulture),
-                        i.Size))
+                        image.ID,
+                        image.RepoTags,
+                        image.Created.ToString(CultureInfo.InvariantCulture),
+                        image.Size))
                 .ToList()
         };
 

@@ -7,7 +7,6 @@ using System.Globalization;
 using DockSweeper.UseCases.Containers.Queries;
 using FastEndpoints;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 
 namespace DockSweeper.Presentation.Containers;
 
@@ -44,14 +43,14 @@ public sealed class ListContainersEndpoint
 
         Response = new ListContainersEndpointResponse
         {
-            Containers = containerListResponses.Select(c =>
+            Containers = containerListResponses.Select(container =>
                     new ContainerRecord(
-                        c.ID,
-                        c.Names,
-                        c.Image,
-                        c.Command,
-                        c.Created.ToString(CultureInfo.InvariantCulture),
-                        c.State))
+                        container.ID,
+                        container.Names,
+                        container.Image,
+                        container.Command,
+                        container.Created.ToString(CultureInfo.InvariantCulture),
+                        container.State))
                 .ToList()
         };
     }
