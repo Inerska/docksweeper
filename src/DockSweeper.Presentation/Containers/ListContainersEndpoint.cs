@@ -59,7 +59,8 @@ public sealed class ListContainersEndpoint
 
 public sealed class ListContainersEndpointRequest
 {
-    [Range(1, 100)] public int Limit { get; init; } = 10;
+    [Range(1, 100)]
+    public int Limit { get; init; } = 10;
 
     public bool All { get; init; } = false;
 }

@@ -35,9 +35,9 @@ public sealed class ListImagesEndpoint
         var images = await _mediator.Send(
             new GetImagesQuery(req.Limit, req.All),
             ct);
-            
+
         var imageListResponses = images.ToList();
-        
+
         Response = new ListImagesEndpointResponse
         {
             Images = imageListResponses.Select(i =>
@@ -48,14 +48,15 @@ public sealed class ListImagesEndpoint
                         i.Size))
                 .ToList()
         };
-        
+
         _logger.LogInformation("Got {Count} docker images", req.Limit);
     }
 }
 
 public sealed class ListImagesEndpointRequest
 {
-    [Range(1, 100)] public int Limit { get; init; } = 10;
+    [Range(1, 100)]
+    public int Limit { get; init; } = 10;
 
     public bool All { get; init; } = false;
 }
