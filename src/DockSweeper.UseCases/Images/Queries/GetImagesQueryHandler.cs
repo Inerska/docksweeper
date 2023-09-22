@@ -23,14 +23,14 @@ public sealed class GetImagesQueryHandler
         CancellationToken cancellationToken)
     {
         var dockerClient = _dockerClientFactory.GetDockerClient();
-        
+
         var images = await dockerClient.Images.ListImagesAsync(
             new ImagesListParameters
             {
-                All = request.All,
+                All = request.All
             },
             cancellationToken);
-        
+
         return images ?? new List<ImagesListResponse>();
     }
 }

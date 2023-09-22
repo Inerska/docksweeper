@@ -5,7 +5,6 @@
 namespace DockSweeper.UseCases.Containers.Queries;
 
 using Docker.DotNet.Models;
-using LanguageExt;
 using MediatR;
 
 public record GetContainersQuery(int Limit, bool All = false)

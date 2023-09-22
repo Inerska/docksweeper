@@ -20,7 +20,10 @@ public class StartContainerCommandHandler
 
     public async Task<bool> Handle(StartContainerCommand request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(request.ContainerId)) return false;
+        if (string.IsNullOrWhiteSpace(request.ContainerId))
+        {
+            return false;
+        }
 
         var client = _dockerClientFactory.GetDockerClient();
         var started = await client.Containers.StartContainerAsync(

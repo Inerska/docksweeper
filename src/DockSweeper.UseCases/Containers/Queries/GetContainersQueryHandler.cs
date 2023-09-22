@@ -6,7 +6,6 @@ namespace DockSweeper.UseCases.Containers.Queries;
 
 using Docker.DotNet.Models;
 using DockSweeper.Application.Abstractions.Docker;
-using LanguageExt;
 using MediatR;
 
 public class GetContainersQueryHandler
